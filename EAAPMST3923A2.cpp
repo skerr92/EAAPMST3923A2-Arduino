@@ -40,6 +40,8 @@ EAAPMST3923A2::~EAAPMST3923A2() {}
     @brief initializes communication with the sensor over the I2C bus
            at the given address. The default address is 0x44
     @param i2caddr The I2C Address for the sensor
+
+    @return bool on if begin was successful or not
 */
 
 bool EAAPMST3923A2::begin(uint8_t i2caddr = I2C_ADDR) {
@@ -83,6 +85,7 @@ uint8_t EAAPMST3923A2::readRegister8(uint8_t reg) {
               Is the register address from where we read from
     @param    value
               Is the value we want to write to the register specified
+    @return
 */
 
 void EAAPMST3923A2::writeRegister8(uint8_t reg, uint8_t value) {
@@ -99,6 +102,7 @@ void EAAPMST3923A2::writeRegister8(uint8_t reg, uint8_t value) {
 /*!
     @brief Enabled the Ambient Light functionality of the sensor and disables
            the proximity sensing capabilities
+    @return
 */
 
 void EAAPMST3923A2::enableAls() { writeRegister8(CFG, 0x04); }
@@ -109,6 +113,7 @@ void EAAPMST3923A2::enableAls() { writeRegister8(CFG, 0x04); }
             Sets the interval for detecting proximity sensing. Accepts a value
             between 0 and 7 for the longest sampling (800ms) interval and the
             shortest sampling (continuous) interval.
+    @return void
 */
 void EAAPMST3923A2::enablePs(uint8_t interval) {
   switch (interval) {
@@ -148,6 +153,7 @@ void EAAPMST3923A2::enablePs(uint8_t interval) {
     @param val a value between 0 and 4 which determines the step range of the
    ambient light sensor. 0 being 800 LUX and 4 being the smallest step range of
                 50 LUX.
+    @return void
 */
 
 void EAAPMST3923A2::setRange(uint8_t val) {
@@ -174,18 +180,21 @@ void EAAPMST3923A2::setRange(uint8_t val) {
 
 /*!
     @brief Returns the current ambient light sensor LUX range set by setRange()
+    @return returns current als lux range
 */
 
 uint8_t EAAPMST3923A2::getRange() { return (readRegister8(ALS_RNG) & 0xf); }
 
 /*!
     @brief Returns the MSB of the ambient light sensor registers.
+    @return returns MSB of ALS data
 */
 
 uint8_t EAAPMST3923A2::alsData() { return (readRegister8(ALS_DT1) & 0xf); }
 
 /*!
     @brief Returns the MSB of the proximity sensor registers.
+    @return returns proximity sensor data
 */
 
 uint8_t EAAPMST3923A2::psData() { return (readRegister8(PS_DATA) & 0xf); }
