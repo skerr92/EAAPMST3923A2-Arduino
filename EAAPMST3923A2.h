@@ -35,23 +35,20 @@
 */
 
 enum regs {
-  PRODUCT_ID = (0x0),
-  CFG = (0x1),
-  INTERRUPT = (0x2),
-  PS_LT = (0X3),
-  PS_HT = (0X4),
-  ALS_TH1 = (0X5),
-  ALS_TH2 = (0X6),
-  ALS_TH3 = (0x7),
-  PS_DATA = (0x8),
-  ALS_DT1 = (0x9),
-  ALS_DT2 = (0xA),
-  ALS_RNG = (0xB)
+  PRODUCT_ID = (0x0), ///< Product ID for sensor
+  CFG = (0x1), ///< Config register
+  INTERRUPT = (0x2), ///< Interrupt register
+  PS_LT = (0X3), ///< Proximity Sensor Lower Threshold register
+  PS_HT = (0X4), ///< Proximity Sensor Higher Threshold register
+  ALS_TH1 = (0X5), ///< Ambient Light Sensor MSB Threshold register
+  ALS_TH2 = (0X6), ///< Ambient Light Sensor Mid Threshold register
+  ALS_TH3 = (0x7), ///< Ambient Light Sensor bottom Threshold register
+  PS_DATA = (0x8), ///< Proximity Sensor Data Register
+  ALS_DT1 = (0x9), ///< Ambient Light Sensor Upper Threshold register
+  ALS_DT2 = (0xA), ///< Ambient Light Sensor Lower Threshold register
+  ALS_RNG = (0xB) ///< Ambient Light Sensor Range register
 }
 
-/*!
-    @brief EAAPMST3923A2 sensor class
-*/
 
 class EAAPMST3923A2 {
 public:
