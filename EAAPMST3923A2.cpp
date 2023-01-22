@@ -27,7 +27,6 @@
  *
  */
 
-
 #include "EAAPMST3923A2.h"
 
 /*!
@@ -43,20 +42,19 @@ EAAPMST3923A2::~EAAPMST3923A2() {}
     @param i2caddr The I2C Address for the sensor
 */
 
-bool EAAPMST3923A2::begin(uint8_t i2caddr=I2C_ADDR)
-{
-    if (i2c_dev) {
-        delete i2c_dev;
-    }
-    i2c_dev = new Adafruit_I2CDevice(i2caddr);
-    if (nullptr == i2c_dev) {
-        Serial.println("EAAPMST3923A2 not initialized");
-        return false;
-    }
-    if (!i2c_dev->begin()) {
-        return false;
-    }
-    return true;
+bool EAAPMST3923A2::begin(uint8_t i2caddr = I2C_ADDR) {
+  if (i2c_dev) {
+    delete i2c_dev;
+  }
+  i2c_dev = new Adafruit_I2CDevice(i2caddr);
+  if (nullptr == i2c_dev) {
+    Serial.println("EAAPMST3923A2 not initialized");
+    return false;
+  }
+  if (!i2c_dev->begin()) {
+    return false;
+  }
+  return true;
 }
 
 /*!
@@ -67,17 +65,15 @@ bool EAAPMST3923A2::begin(uint8_t i2caddr=I2C_ADDR)
     @return The 8 bit value of the register read is returned.
 */
 
-uint8_t EAAPMST3923A2::readRegister8(uint8_t reg)
-{
-    if (nullptr == i2c_Dev) {
-        Serial.println("EAAPMST3923A2 not initialized");
-        return (0xf);
-    }
-    else {
-        Adafruit_BusIO_Register read_reg = Adafruit_BusIO_Register(i2c_dev, reg, 1);
-    }
-    uint8_t r_val;
-    return read_reg.read(&r_val, 0x8); // change to value returned from register
+uint8_t EAAPMST3923A2::readRegister8(uint8_t reg) {
+  if (nullptr == i2c_Dev) {
+    Serial.println("EAAPMST3923A2 not initialized");
+    return (0xf);
+  } else {
+    Adafruit_BusIO_Register read_reg = Adafruit_BusIO_Register(i2c_dev, reg, 1);
+  }
+  uint8_t r_val;
+  return read_reg.read(&r_val, 0x8); // change to value returned from register
 }
 
 /*!
@@ -89,16 +85,15 @@ uint8_t EAAPMST3923A2::readRegister8(uint8_t reg)
               Is the value we want to write to the register specified
 */
 
-void EAAPMST3923A2::writeRegister8(uint8_t reg, uint8_t value)
-{
-    if (nullptr == i2c_dev) {
-        Serial.println("EAAPMST3923A2 not initialized");
-        return;
-    }
-    else {
-        Adafruit_BusIO_Register write_reg = Adafruit_BusIO_Register(i2c_dev, reg, 1);
-    }
-    write_reg.write(value, 0x8);
+void EAAPMST3923A2::writeRegister8(uint8_t reg, uint8_t value) {
+  if (nullptr == i2c_dev) {
+    Serial.println("EAAPMST3923A2 not initialized");
+    return;
+  } else {
+    Adafruit_BusIO_Register write_reg =
+        Adafruit_BusIO_Register(i2c_dev, reg, 1);
+  }
+  write_reg.write(value, 0x8);
 }
 
 /*!
@@ -106,106 +101,91 @@ void EAAPMST3923A2::writeRegister8(uint8_t reg, uint8_t value)
            the proximity sensing capabilities
 */
 
-void EAAPMST3923A2::enableAls()
-{
-    writeRegister8(CFG, 0x04);
-}
+void EAAPMST3923A2::enableAls() { writeRegister8(CFG, 0x04); }
 /*!
-    @brief Enabled the Proximity sensing functionality of the sensor and disables
-           the ambient light sensing capabilities
+    @brief Enabled the Proximity sensing functionality of the sensor and
+   disables the ambient light sensing capabilities
     @param interval
             Sets the interval for detecting proximity sensing. Accepts a value
-            between 0 and 7 for the longest sampling (800ms) interval and the 
+            between 0 and 7 for the longest sampling (800ms) interval and the
             shortest sampling (continuous) interval.
 */
-void EAAPMST3923A2::enablePs(uint8_t interval)
-{
-switch (interval) {
-        case 0:
-            writeRegister8(CFG,0x80);
-        break;
-        case 1:
-            writeRegister8(CFG,0x90);
-        break;
-        case 2:
-            writeRegister8(CFG,0xA0);
-        break;
-        case 3:
-            writeRegister8(CFG,0xB0);
-        break;
-        case 4:
-            writeRegister8(CFG,0xC0);
-        break;
-        case 5:
-            writeRegister8(CFG,0xD0);
-        break;
-        case 6:
-            writeRegister8(CFG,0xE0);
-        break;
-        case 7:
-            writeRegister8(CFG,0xF0);
-        break;
-        default:
-            writeRegister8(CFG,0xB0);
-    }
+void EAAPMST3923A2::enablePs(uint8_t interval) {
+  switch (interval) {
+  case 0:
+    writeRegister8(CFG, 0x80);
+    break;
+  case 1:
+    writeRegister8(CFG, 0x90);
+    break;
+  case 2:
+    writeRegister8(CFG, 0xA0);
+    break;
+  case 3:
+    writeRegister8(CFG, 0xB0);
+    break;
+  case 4:
+    writeRegister8(CFG, 0xC0);
+    break;
+  case 5:
+    writeRegister8(CFG, 0xD0);
+    break;
+  case 6:
+    writeRegister8(CFG, 0xE0);
+    break;
+  case 7:
+    writeRegister8(CFG, 0xF0);
+    break;
+  default:
+    writeRegister8(CFG, 0xB0);
+  }
 }
 
 /*!
-    @brief Sets the lux range of the ambient light sensor in a range from 50 LUX up
-           to 800 LUX
+    @brief Sets the lux range of the ambient light sensor in a range from 50 LUX
+   up to 800 LUX
 
-    @param val a value between 0 and 4 which determines the step range of the ambient
-                light sensor. 0 being 800 LUX and 4 being the smallest step range of
+    @param val a value between 0 and 4 which determines the step range of the
+   ambient light sensor. 0 being 800 LUX and 4 being the smallest step range of
                 50 LUX.
 */
 
-void EAAPMST3923A2::setRange(uint8_t val)
-{
-    switch (val) {
-        case 0:
-            writeRegister8(ALS_RNG,0x00);
-        break;
-        case 1:
-            writeRegister8(ALS_RNG,0x01);
-        break;
-        case 2:
-            writeRegister8(ALS_RNG,0x02);
-        break;
-        case 3:
-            writeRegister8(ALS_RNG,0x03);
-        break;
-        case 4:
-            writeRegister8(ALS_RNG,0x04);
-        break;
-        default:
-            writeRegister8(ALS_RNG,0x00);
-    }
-
+void EAAPMST3923A2::setRange(uint8_t val) {
+  switch (val) {
+  case 0:
+    writeRegister8(ALS_RNG, 0x00);
+    break;
+  case 1:
+    writeRegister8(ALS_RNG, 0x01);
+    break;
+  case 2:
+    writeRegister8(ALS_RNG, 0x02);
+    break;
+  case 3:
+    writeRegister8(ALS_RNG, 0x03);
+    break;
+  case 4:
+    writeRegister8(ALS_RNG, 0x04);
+    break;
+  default:
+    writeRegister8(ALS_RNG, 0x00);
+  }
 }
 
 /*!
     @brief Returns the current ambient light sensor LUX range set by setRange()
 */
 
-uint8_t EAAPMST3923A2::getRange()
-{
-    return (readRegister8(ALS_RNG) & 0xf);
-}
+uint8_t EAAPMST3923A2::getRange() { return (readRegister8(ALS_RNG) & 0xf); }
 
 /*!
     @brief Returns the MSB of the ambient light sensor registers.
 */
 
-uint8_t EAAPMST3923A2::alsData()
-{
-    return (readRegister8(ALS_DT1) & 0xf);
-}
+uint8_t EAAPMST3923A2::alsData() { return (readRegister8(ALS_DT1) & 0xf); }
 
 /*!
     @brief Returns the MSB of the proximity sensor registers.
 */
 
-uint8_t EAAPMST3923A2::psData()
-{
-    return (readRegister8(PS_DATA) & 0xf);
-}
+uint8_t EAAPMST3923A2::psData() { return (readRegister8(PS_DATA) & 0xf); }

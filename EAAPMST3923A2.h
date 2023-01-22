@@ -35,43 +35,42 @@
 */
 
 enum regs {
-    PRODUCT_ID = (0x0),
-    CFG = (0x1),
-    INTERRUPT = (0x2),
-    PS_LT = (0X3),
-    PS_HT = (0X4),
-    ALS_TH1 = (0X5),
-    ALS_TH2 = (0X6),
-    ALS_TH3 = (0x7),
-    PS_DATA = (0x8),
-    ALS_DT1 = (0x9),
-    ALS_DT2 = (0xA),
-    ALS_RNG = (0xB)
+  PRODUCT_ID = (0x0),
+  CFG = (0x1),
+  INTERRUPT = (0x2),
+  PS_LT = (0X3),
+  PS_HT = (0X4),
+  ALS_TH1 = (0X5),
+  ALS_TH2 = (0X6),
+  ALS_TH3 = (0x7),
+  PS_DATA = (0x8),
+  ALS_DT1 = (0x9),
+  ALS_DT2 = (0xA),
+  ALS_RNG = (0xB)
 }
 
 /*!
     @brief EAAPMST3923A2 sensor class
 */
 
-class EAAPMST3923A2
-{
+class EAAPMST3923A2 {
 public:
-    EAAPMST3923A2();
-    virtual ~EAAPMST3923A2();
+  EAAPMST3923A2();
+  virtual ~EAAPMST3923A2();
 
-    bool begin(uint8_t i2caddr=I2C_ADDR);
+  bool begin(uint8_t i2caddr = I2C_ADDR);
 
-    uint8_t readRegister8(uint8_t reg);
-    void writeRegister8(uint8_t reg, uint8_t value);
-    void enableAls();
-    void enablePs(uint8_t interval);
-    void setRange(uint8_t);
-    uint8_t getRange();
-    uint8_t alsData();
-    uint8_t psData();
+  uint8_t readRegister8(uint8_t reg);
+  void writeRegister8(uint8_t reg, uint8_t value);
+  void enableAls();
+  void enablePs(uint8_t interval);
+  void setRange(uint8_t);
+  uint8_t getRange();
+  uint8_t alsData();
+  uint8_t psData();
 
 private:
-    Adafruit_I2CDevice *i2c_dev = NULL;
+  Adafruit_I2CDevice *i2c_dev = NULL;
 };
 
 #endif
