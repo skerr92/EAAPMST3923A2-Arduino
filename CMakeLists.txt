@@ -1,11 +1,11 @@
-# <your library name
-# https://github.com/<your_user>/<repo_name>
+# EAAPMST3923A2 Arduino
+# https://github.com/skerr92/EAAPMST3923A2-Arduino
 # MIT License
 
 cmake_minimum_required(VERSION 3.5)
 
-idf_component_register(SRCS "hello.cpp" 
+idf_component_register(SRCS "EAAPMST3923A2.cpp" 
                        INCLUDE_DIRS "."
                        REQUIRES arduino)
 
-project(<your_project>)
+project(EAAPMST3923A2)
