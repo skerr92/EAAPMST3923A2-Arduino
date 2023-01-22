@@ -34,6 +34,10 @@
  */
 EAAPMST3923A2::EAAPMST3923A2() {}
 
+/*!
+    @brief Destructor
+    @return
+*/
 EAAPMST3923A2::~EAAPMST3923A2() {}
 
 /*!
