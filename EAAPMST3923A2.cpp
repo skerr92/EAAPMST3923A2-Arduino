@@ -31,6 +31,7 @@
 
 /*!
  * @brief Constructor
+ * @return
  */
 EAAPMST3923A2::EAAPMST3923A2() {}
 
