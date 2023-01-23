@@ -27,7 +27,7 @@ jobs:
 
     - name: Check for correct documentation with doxygen
       env:
-        GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
+        GH_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PRETTYNAME : "EAAPMST3923A2 Arduino"
       run: bash ci/doxy_gen_and_deploy.sh
 
