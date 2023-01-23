@@ -2,6 +2,9 @@ name: Arduino Library CI
 
 on: [pull_request, push, repository_dispatch]
 
+permissions: 
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
