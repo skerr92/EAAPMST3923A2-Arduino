@@ -29,10 +29,6 @@
 
 #define I2C_ADDR 0x44 ///< default I2C Address (fixed)
 
-/*!
-    @brief registers for setting and reading sensor samples
-*/
-
 #define PRODUCT_ID (0x0) ///< Product ID for sensor
 #define CFG (0x1)        ///< Config register
 #define INTERRUPT (0x2)  ///< Interrupt register
