@@ -53,7 +53,7 @@ bool EAAPMST3923A2::begin(TwoWire *theWire) {
   if (i2c_dev) {
     delete i2c_dev;
   }
-  i2c_dev = new Adafruit_I2CDevice(i2caddr, theWire);
+  i2c_dev = new Adafruit_I2CDevice(I2C_ADDR, theWire);
   if (nullptr == i2c_dev) {
     Serial.println("EAAPMST3923A2 not initialized");
     return false;
@@ -73,14 +73,14 @@ bool EAAPMST3923A2::begin(TwoWire *theWire) {
 */
 
 uint8_t EAAPMST3923A2::readRegister8(uint8_t reg) {
-  if (nullptr == i2c_Dev) {
-    Serial.println("EAAPMST3923A2 not initialized");
-    return (0xf);
-  } else {
+  if (nullptr != i2c_dev) {
     Adafruit_BusIO_Register read_reg = Adafruit_BusIO_Register(i2c_dev, reg, 1);
+    uint8_t r_val;
+    return read_reg.read(&r_val,
+                         0xff); // change to value returned from register
   }
-  uint8_t r_val;
-  return read_reg.read(&r_val, 0x8); // change to value returned from register
+  Serial.println("EAAPMST3923A2 not initialized");
+  return (0xf);
 }
 
 /*!
@@ -101,7 +101,7 @@ void EAAPMST3923A2::writeRegister8(uint8_t reg, uint8_t value) {
     Adafruit_BusIO_Register write_reg =
         Adafruit_BusIO_Register(i2c_dev, reg, 1);
   }
-  write_reg.write(value, 0x8);
+  write_reg.write(value, 0xff);
 }
 
 /*!
@@ -188,18 +188,18 @@ void EAAPMST3923A2::setRange(uint8_t val) {
     @return returns current als lux range
 */
 
-uint8_t EAAPMST3923A2::getRange() { return (readRegister8(ALS_RNG) & 0xf); }
+uint8_t EAAPMST3923A2::getRange() { return (readRegister8(ALS_RNG) & 0xff); }
 
 /*!
     @brief Returns the MSB of the ambient light sensor registers.
     @return returns MSB of ALS data
 */
 
-uint8_t EAAPMST3923A2::alsData() { return (readRegister8(ALS_DT1) & 0xf); }
+uint8_t EAAPMST3923A2::alsData() { return (readRegister8(ALS_DT1) & 0xff); }
 
 /*!
     @brief Returns the MSB of the proximity sensor registers.
     @return returns proximity sensor data
 */
 
-uint8_t EAAPMST3923A2::psData() { return (readRegister8(PS_DATA) & 0xf); }
+uint8_t EAAPMST3923A2::psData() { return (readRegister8(PS_DATA) & 0xff); }
