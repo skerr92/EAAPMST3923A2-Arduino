@@ -24,7 +24,6 @@
 
 #include "Arduino.h"
 
-#include <Adafruit_BusIO_Register.h>
 #include <Adafruit_I2CDevice.h>
 #include <Wire.h>
 
@@ -54,7 +53,7 @@ public:
   EAAPMST3923A2();
   virtual ~EAAPMST3923A2();
 
-  bool begin(uint8_t i2caddr = I2C_ADDR);
+  bool begin(TwoWire *theWire = &Wire);
 
   uint8_t readRegister8(uint8_t reg);
   void writeRegister8(uint8_t reg, uint8_t value);

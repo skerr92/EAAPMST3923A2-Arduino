@@ -49,11 +49,11 @@ EAAPMST3923A2::~EAAPMST3923A2() {}
     @return bool on if begin was successful or not
 */
 
-bool EAAPMST3923A2::begin(uint8_t i2caddr = I2C_ADDR) {
+bool EAAPMST3923A2::begin(TwoWire *theWire) {
   if (i2c_dev) {
     delete i2c_dev;
   }
-  i2c_dev = new Adafruit_I2CDevice(i2caddr);
+  i2c_dev = new Adafruit_I2CDevice(i2caddr, theWire);
   if (nullptr == i2c_dev) {
     Serial.println("EAAPMST3923A2 not initialized");
     return false;
