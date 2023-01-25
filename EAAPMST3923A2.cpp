@@ -44,7 +44,7 @@ EAAPMST3923A2::~EAAPMST3923A2() {}
 /*!
     @brief initializes communication with the sensor over the I2C bus
            at the given address. The default address is 0x44
-    @param i2caddr The I2C Address for the sensor
+    @param theWire ardunio two wire pointer
 
     @return bool on if begin was successful or not
 */
