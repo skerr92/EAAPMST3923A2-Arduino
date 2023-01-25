@@ -42,6 +42,10 @@
 #define ALS_DT2 (0xA)    ///< Ambient Light Sensor Lower Threshold register
 #define ALS_RNG (0xB)    ///< Ambient Light Sensor Range register
 
+/*!
+ @brief EAAPMST3923A2 class constructor
+*/
+
 class EAAPMST3923A2 {
 public:
   EAAPMST3923A2(void);
